@@ -1,16 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { ChangeEvent, useState, SyntheticEvent } from "react";
 type Props = {};
 
 const search = (props: Props) => {
   const [search, setSearch] = useState<string>("");
-  const onclick = (e: any) => {
-    setSearch(e);
-    console.log(e);
+  const onhandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    // console.log(e.target.value);
+  };
+  const onClick = (e: SyntheticEvent) => {
+    console.log(search);
   };
   return (
     <div className="search">
-      <input value={search} onChange={(e) => onclick(e.target.value)} />
+      <input value={search} onChange={(e) => onhandleChange(e)} />
+      <button onClick={(e) => onClick(e)}>Search</button>
     </div>
   );
 };
