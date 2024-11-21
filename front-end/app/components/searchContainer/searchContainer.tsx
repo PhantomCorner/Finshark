@@ -28,6 +28,7 @@ export default function Home() {
 
   return (
     <div>
+      {serverErr && <div>{serverErr}</div>}
       <Search
         query={search}
         onhandleChange={onhandleChange}
