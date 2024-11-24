@@ -13,6 +13,7 @@ export default function Home() {
     // console.log(e.target.value);
   };
   const onClick = async (e: SyntheticEvent) => {
+    e.preventDefault();
     const res = await searchCompanies(search);
     if (typeof res === "string") {
       setServerErr(res);
@@ -21,7 +22,10 @@ export default function Home() {
       setSearchRes(res);
     }
   };
-
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+    console.log(e);
+  };
   useEffect(() => {
     console.log("更新后的searchRes:", searchRes);
   }, [searchRes]);
@@ -31,10 +35,10 @@ export default function Home() {
       {serverErr && <div>{serverErr}</div>}
       <Search
         query={search}
-        onhandleChange={onhandleChange}
-        onClick={onClick}
+        handleSearchChange={onhandleChange}
+        onSearchSubmit={onClick}
       />
-      <CardList searchRes={searchRes} />
+      <CardList searchRes={searchRes} handleSubmit={handleSubmit} />
     </div>
   );
 }

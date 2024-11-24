@@ -1,17 +1,20 @@
 "use client";
 import React, { ChangeEvent, SyntheticEvent } from "react";
 interface Props {
-  onClick: (e: SyntheticEvent) => void;
+  onSearchSubmit: (e: SyntheticEvent) => void;
+  handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
   query: string | undefined;
-  onhandleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const search = ({ onClick, query, onhandleChange }: Props) => {
+const search = ({ onSearchSubmit, query, handleSearchChange }: Props) => {
   return (
-    <div className="search">
-      <input value={query} onChange={(e) => onhandleChange(e)} />
-      <button onClick={(e) => onClick(e)}>Search</button>
-    </div>
+    <form onSubmit={onSearchSubmit}>
+      <input value={query} onChange={handleSearchChange} />
+    </form>
+    // <div className="search">
+    //   <input value={query} onChange={(e) => onhandleChange(e)} />
+    //   <button onClick={(e) => onClick(e)}>Search</button>
+    // </div>
   );
 };
 export default search;

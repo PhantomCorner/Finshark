@@ -1,12 +1,15 @@
 import React from "react";
 import "./card.css";
 import { CompanySearch } from "@/company";
+import AddPortfolio from "../portfolio/addPortfolio/addPortfolio";
+import { SyntheticEvent } from "react";
 interface Props {
   id: string;
   searchRes: CompanySearch;
+  handleSubmit: (e: SyntheticEvent) => void;
 }
 
-const card = ({ id, searchRes }: Props) => {
+const card = ({ id, searchRes, handleSubmit }: Props) => {
   return (
     <div className="card">
       <div className="id">{id}</div>
@@ -21,6 +24,7 @@ const card = ({ id, searchRes }: Props) => {
       <p className="infor">
         {searchRes.exchangeShortName}-{searchRes.exchangeShortName}
       </p>
+      <AddPortfolio handleSubmit={handleSubmit} symbol={searchRes.symbol} />
     </div>
   );
 };
