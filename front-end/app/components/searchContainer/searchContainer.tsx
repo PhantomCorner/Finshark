@@ -34,7 +34,7 @@ export default function Home() {
         onhandleChange={onhandleChange}
         onClick={onClick}
       />
-      <CardList />
+      <CardList searchRes={searchRes} />
     </div>
   );
 }

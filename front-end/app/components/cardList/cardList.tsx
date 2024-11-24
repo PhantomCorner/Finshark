@@ -1,37 +1,26 @@
 import React from "react";
 import Card from "../card/card";
+import { CompanySearch } from "@/company";
+import { useState, useEffect } from "react";
 // receive data for each card
-interface Props {}
+interface Props {
+  searchRes: CompanySearch[];
+}
 
-const cardList = (props: Props) => {
-  const data = [
-    {
-      companyName: "Apple",
-      ticker: "APPL",
-      price: 120,
-    },
-    {
-      companyName: "Apple_1",
-      ticker: "APPL_1",
-      price: 220,
-    },
-    {
-      companyName: "Apple_2",
-      ticker: "APPL_2",
-      price: 320,
-    },
-  ];
+const CardList = (props: Props) => {
+  const [processedData, setProcessedData] = useState(props.searchRes);
+
+  useEffect(() => {
+    // 在这里处理数据
+    setProcessedData(props.searchRes);
+  }, [props.searchRes]);
+
   return (
     <div>
-      {data.map((item, index) => (
-        <Card
-          companyName={item.companyName}
-          ticker={item.ticker}
-          price={item.price}
-          key={index}
-        />
+      {processedData.map((item, index) => (
+        <Card key={index.toString()} id={index.toString()} searchRes={item} />
       ))}
     </div>
   );
 };
-export default cardList;
+export default CardList;
