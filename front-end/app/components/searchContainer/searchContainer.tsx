@@ -2,17 +2,21 @@
 import { searchCompanies } from "@/api";
 import CardList from "../cardList/cardList";
 import Search from "../search/search";
+import ListPortfolio from "../portfolio/listPortfolio/listPortfolio";
 import { ChangeEvent, SyntheticEvent, useState, useEffect } from "react";
 import { CompanySearch } from "@/company";
 export default function Home() {
   const [search, setSearch] = useState<string>("");
+  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
   const [searchRes, setSearchRes] = useState<CompanySearch[]>([]);
   const [serverErr, setServerErr] = useState<string>("");
-  const onhandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  // handle search bar change
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    // console.log(e.target.value);
   };
-  const onClick = async (e: SyntheticEvent) => {
+
+  // handle search bar submit
+  const submitSearch = async (e: SyntheticEvent) => {
     e.preventDefault();
     const res = await searchCompanies(search);
     if (typeof res === "string") {
@@ -22,12 +26,17 @@ export default function Home() {
       setSearchRes(res);
     }
   };
-  const handleSubmit = (e: SyntheticEvent) => {
+  // add a card to portfolio
+  const onPortfolioCreate = (e: any) => {
     e.preventDefault();
-    console.log(e);
+    console.log(e.target[0].value);
+    const exist = portfolioValues.find((value) => value === e.target[0].value);
+    if (exist) return;
+    const updatedPortfolio = [...portfolioValues, e.target[0].value];
+    setPortfolioValues(updatedPortfolio);
   };
   useEffect(() => {
-    console.log("更新后的searchRes:", searchRes);
+    console.log("Updated res:", searchRes);
   }, [searchRes]);
 
   return (
@@ -35,10 +44,11 @@ export default function Home() {
       {serverErr && <div>{serverErr}</div>}
       <Search
         query={search}
-        handleSearchChange={onhandleChange}
-        onSearchSubmit={onClick}
+        handleSearchChange={handleSearchChange}
+        onSearchSubmit={submitSearch}
       />
-      <CardList searchRes={searchRes} handleSubmit={handleSubmit} />
+      <ListPortfolio portfolioValues={portfolioValues} />
+      <CardList searchRes={searchRes} handleSubmit={onPortfolioCreate} />
     </div>
   );
 }
