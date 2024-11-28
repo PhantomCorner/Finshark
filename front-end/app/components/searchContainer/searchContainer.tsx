@@ -39,6 +39,14 @@ export default function Home() {
     console.log("Updated res:", searchRes);
   }, [searchRes]);
 
+  // hanlde Portfolio content remove
+  const onPortfolioDelete = (e: any) => {
+    e.preventDefault();
+    const removed = portfolioValues.filter((value) => {
+      return value !== e.target[0].value;
+    });
+    setPortfolioValues(removed);
+  };
   return (
     <div>
       {serverErr && <div>{serverErr}</div>}
@@ -47,7 +55,10 @@ export default function Home() {
         handleSearchChange={handleSearchChange}
         onSearchSubmit={submitSearch}
       />
-      <ListPortfolio portfolioValues={portfolioValues} />
+      <ListPortfolio
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      />
       <CardList searchRes={searchRes} handleSubmit={onPortfolioCreate} />
     </div>
   );
