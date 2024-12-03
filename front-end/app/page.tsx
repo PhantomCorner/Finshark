@@ -1,9 +1,3 @@
-import SearchContainer from "./components/searchContainer/searchContainer";
-
 export default function Home() {
-  return (
-    <div>
-      <SearchContainer />
-    </div>
-  );
+  return <div>This is the / page</div>;
 }
