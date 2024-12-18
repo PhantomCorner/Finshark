@@ -3,7 +3,8 @@ import { getCompanyProfile } from "@/api";
 import { CompanyProfile } from "@/company";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import SideBar from "../../components/sideBar/sideBar";
+import CompanyDashboard from "../../components/companyDashboard/companyDashboard";
 interface Props {}
 export default function companyPage(props: Props) {
   const params = useParams<{ companyName: string }>();
@@ -32,6 +33,10 @@ export default function companyPage(props: Props) {
       ) : (
         <div>Company Not Found</div>
       )}
+      <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
+        <CompanyDashboard />
+        <SideBar />
+      </div>
     </div>
   );
 }
