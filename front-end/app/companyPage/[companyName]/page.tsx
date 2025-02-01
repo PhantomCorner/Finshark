@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import SideBar from "../../components/sideBar/sideBar";
 import CompanyDashboard from "../../components/companyDashboard/companyDashboard";
+import Tile from "../../components/tile/tile";
 interface Props {}
 export default function companyPage(props: Props) {
   const params = useParams<{ companyName: string }>();
@@ -34,7 +35,9 @@ export default function companyPage(props: Props) {
         <div>Company Not Found</div>
       )}
       <div className="w-full relative flex ct-docs-disable-sidebar-content overflow-x-hidden">
-        <CompanyDashboard />
+        <CompanyDashboard ticker={params.companyName}>
+          <Tile title="Company Name" subTitle={params.companyName} />
+        </CompanyDashboard>
         <SideBar />
       </div>
     </div>

@@ -1,19 +1,10 @@
-import React from "react";
-import { TestDataCompany } from "../table/testData";
+type Props = {
+  config: any;
+  data: any;
+};
 
-type Props = {};
-const data = TestDataCompany[0];
-type Company = typeof data;
-const configs = [
-  {
-    label: "Company Name",
-    render: (company: Company) => company.companyName,
-    subTitle: "This is company name",
-  },
-];
-
-const ratioList = (props: Props) => {
-  const renderedCells = configs.map((row: any) => {
+const ratioList = ({ config, data }: Props) => {
+  const renderedCells = config.map((row: any) => {
     return (
       <li className="py-6 sm:py-6">
         <div className="flex items-center space-x-4">
