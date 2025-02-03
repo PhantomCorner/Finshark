@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "@node_modules/next/image";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 export default function Nav() {
@@ -37,7 +37,7 @@ export default function Nav() {
             </button>
             <Link href="/profile">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user.image}
                 width={35}
                 height={35}
                 className="rounded-full"
@@ -70,7 +70,7 @@ export default function Nav() {
           <div className="flex">
             <div className="flex">
               <Image
-                src="/assets/images/logo.svg"
+                src={session?.user.image}
                 width={35}
                 height={35}
                 className="rounded-full"
