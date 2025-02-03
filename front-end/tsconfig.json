@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "pages/dashboard/index.js"
+    "pages/dashboard/index.js",
+    "app/components/Nav.jsx"
   ],
   "exclude": ["node_modules"]
 }
