@@ -4,17 +4,16 @@ import Image from "@node_modules/next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 export default function Nav() {
-  const isUserLogged = true;
+  const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
   useEffect(() => {
-    const setProviders = async () => {
+    (async () => {
       const res = await getProviders();
       setProviders(res);
-    };
+    })();
   }, []);
   return (
-    //  {/* nav for large screen user */}
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
@@ -26,9 +25,9 @@ export default function Nav() {
         />
         <p className="logo_text">Promptopia</p>
       </Link>
-
+      {/* nav for large screen user */}
       <div className="sm:flex hidden">
-        {isUserLogged ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
               Create Prompt
@@ -50,7 +49,7 @@ export default function Nav() {
           // if user not log in
           <>
             {providers &&
-              Object.values(providers).map((provider) => {
+              Object.values(providers).map((provider) => (
                 <button
                   type="button"
                   key={provider.name}
@@ -59,15 +58,15 @@ export default function Nav() {
                   }}
                   className="black_btn"
                 >
-                  {provider}
-                </button>;
-              })}
+                  Sign In
+                </button>
+              ))}
           </>
         )}
       </div>
       {/* // mobile nav */}
       <div className="sm:hidden flex relative">
-        {isUserLogged ? (
+        {session?.user ? (
           <div className="flex">
             <div className="flex">
               <Image
@@ -112,7 +111,7 @@ export default function Nav() {
           // if user not log in
           <>
             {providers &&
-              Object.values(providers).map((provider) => {
+              Object.values(providers).map((provider) => (
                 <button
                   type="button"
                   key={provider.name}
@@ -122,8 +121,8 @@ export default function Nav() {
                   className="black_btn"
                 >
                   Sign In
-                </button>;
-              })}
+                </button>
+              ))}
           </>
         )}
       </div>
