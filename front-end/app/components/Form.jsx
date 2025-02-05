@@ -55,7 +55,7 @@ export default function Form({ type, post, setPost, submit, handleSubmit }) {
             disabled={submit}
             className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white"
           >
-            {submit ? `${type} ...` : type}
+            {submit ? "Submitting..." : `${type} Prompt`}
           </button>
         </div>
       </form>

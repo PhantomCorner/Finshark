@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import Form from "../components/Form";
 export default function Page() {
+  const { data: session } = useSession();
+
   const [submit, setSubmit] = useState(false);
   const [post, setPost] = useState({
     prompt: "",
@@ -11,7 +13,6 @@ export default function Page() {
   const createPrompt = async (e) => {
     e.preventDefault();
     setSubmit(true);
-    const { data: session } = useSession();
     try {
       const res = await fetch("/api/prompt/new", {
         method: "POST",
