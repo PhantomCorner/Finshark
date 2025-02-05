@@ -16,6 +16,7 @@ const handler = NextAuth({
         email: session.user.email,
       });
       session.user.id = sessionUser._id.toString();
+      return session;
     },
     async signIn({ profile }) {
       console.log(profile);
@@ -27,16 +28,16 @@ const handler = NextAuth({
         });
         // if not, create a new one and save to db
         if (!isExists) {
-          console.log("name", profile.name);
-          await User.create({
+          const newUser = new User({
             email: profile.email,
-            username: profile.name.replaceAll(" ", "").toLocaleLowerCase(),
+            name: profile.name,
             image: profile.picture,
           });
+          await newUser.save();
         }
         return true;
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.error("Error signing in:", error);
         return false;
       }
     },

@@ -11,7 +11,24 @@ export default function Page() {
   const createPrompt = async (e) => {
     e.preventDefault();
     setSubmit(true);
-    console.log(post);
+    const { data: session } = useSession();
+    try {
+      const res = await fetch("/api/prompt/new", {
+        method: "POST",
+        body: JSON.stringify({
+          prompt: post.prompt,
+          userId: session?.user.id,
+          tag: post.tag,
+        }),
+      });
+      if (res.ok) {
+        router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setSubmit(false);
+    }
   };
   return (
     <Form
