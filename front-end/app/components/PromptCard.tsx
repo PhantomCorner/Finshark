@@ -1,7 +1,21 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-export default function PromptCard({ post }) {
+export default function PromptCard({
+  post,
+  handleTagClick,
+  handleEdit,
+  handleDelete,
+}) {
+  const [copied, setCopied] = useState("");
+  const handleCopy = () => {
+    setCopied(post.prompt);
+    navigator.clipboard.writeText(post.prompt);
+    alert("content copied");
+    setTimeout(() => {
+      setCopied(""), 4000;
+    });
+  };
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5 item-center gap-3 cursor-pointer">
@@ -17,6 +31,28 @@ export default function PromptCard({ post }) {
             <p>{post.creator.username}</p>
             <p>{post.creator.email}</p>
           </h3>
+          <p className="my-4 font-satoshi text-sm ">{post.prompt}</p>
+          <p
+            className="font-inter text-sm"
+            onClick={() => {
+              handleTagClick && handleTagClick(post.tag);
+            }}
+          >
+            #{post.tag}
+          </p>
+        </div>
+        <div className="copy_btn">
+          <Image
+            onClick={handleCopy}
+            alt="copy_img"
+            src={
+              copied === post.prompt
+                ? "/assets/icons/tick.svg"
+                : "/assets/icons/copy.svg"
+            }
+            width={12}
+            height={12}
+          />
         </div>
       </div>
     </div>
