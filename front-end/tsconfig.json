@@ -30,7 +30,8 @@
     "pages/dashboard/index.js",
     "app/components/Nav.jsx",
     "app/layout.jsx",
-    "app/components/Provider.jsx"
+    "app/components/Provider.jsx",
+    "app/components/PromptCard.jsx"
   ],
   "exclude": ["node_modules"]
 }
