@@ -1,12 +1,17 @@
 "use client";
 import { useState } from "react";
+import { useSession } from "@node_modules/next-auth/react";
 import Image from "next/image";
+import { usePathname } from "@node_modules/next/navigation";
+import { useRouter } from "@node_modules/next/router";
 export default function PromptCard({
   content,
   handleTagClick,
   handleEdit,
   handleDelete,
 }) {
+  const { data: session } = useSession();
+  const pathName = usePathname();
   const [copied, setCopied] = useState("");
   const handleCopy = () => {
     setCopied(content.prompt);
@@ -55,8 +60,12 @@ export default function PromptCard({
           />
         </div>
       </div>
-      <p onClick={handleEdit}>edit</p>
-      <p onClick={handleDelete}>delete</p>
+      {session?.user.id === content.creator._id && pathName === "/profile" && (
+        <div>
+          <p onClick={handleEdit}>Edit</p>
+          <p onClick={handleDelete}>Delete</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -18,8 +18,12 @@ const ProfilePage = () => {
     }
   }, [session]);
 
-  const handleDelete = () => {};
-  const handleEdit = () => {};
+  const handleDelete = (item) => {
+    console.log("delete", item._id);
+  };
+  const handleEdit = (item) => {
+    console.log("edit", item._id);
+  };
   return (
     <div>
       <Profile

@@ -9,7 +9,7 @@ const PromptCardList = ({ prompts }) => {
     <div className="mt-16 prompt_layout">
       {prompts.map((item) => (
         <div key={item._id}>
-          <PromptCard post={item} />
+          <PromptCard content={item} />
         </div>
       ))}
     </div>
