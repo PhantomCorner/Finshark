@@ -16,7 +16,7 @@ export default function Form({ type, post, setPost, submit, handleSubmit }) {
             Your AI Prompt
           </span>
           <textarea
-            value={post.promt}
+            value={post.prompt}
             onChange={(e) => {
               setPost({
                 ...post,

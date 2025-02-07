@@ -61,7 +61,7 @@ export default function PromptCard({
         </div>
       </div>
       {session?.user.id === content.creator._id && pathName === "/profile" && (
-        <div>
+        <div className="cursor-pointer">
           <p onClick={handleEdit}>Edit</p>
           <p onClick={handleDelete}>Delete</p>
         </div>

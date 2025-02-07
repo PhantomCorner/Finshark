@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useSession } from "@node_modules/next-auth/react";
-import { useRouter } from "@node_modules/next/router";
+import { useRouter } from "@node_modules/next/navigation";
 import Profile from "../components/Profile";
 const ProfilePage = () => {
+  const router = useRouter();
   const { data: session } = useSession();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
@@ -22,7 +23,7 @@ const ProfilePage = () => {
     console.log("delete", item._id);
   };
   const handleEdit = (item) => {
-    console.log("edit", item._id);
+    router.push(`/edit-prompt?id=${item._id}`);
   };
   return (
     <div>

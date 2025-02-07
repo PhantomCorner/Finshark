@@ -1,16 +1,16 @@
 import Prompt from "@models/prompt";
-import { connectToDB } from "@utils/database";
+import { connectToDb } from "@utils/database";
 
 export const GET = async (request, { params }) => {
   try {
-    await connectToDB();
+    await connectToDb();
 
-    const prompt = await Prompt.findById(params.id).populate("creator");
+    const prompt = await Prompt.findById(params.id);
     if (!prompt) return new Response("Prompt Not Found", { status: 404 });
 
     return new Response(JSON.stringify(prompt), { status: 200 });
   } catch (error) {
-    return new Response("Internal Server Error", { status: 500 });
+    return new Response(error, { status: 500 });
   }
 };
 
@@ -18,7 +18,7 @@ export const PATCH = async (request, { params }) => {
   const { prompt, tag } = await request.json();
 
   try {
-    await connectToDB();
+    await connectToDb();
 
     // Find the existing prompt by ID
     const existingPrompt = await Prompt.findById(params.id);
