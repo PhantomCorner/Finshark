@@ -7,7 +7,8 @@ using api.Models;
 namespace api.Interfaces
 {
 
-    public class IStockRepository
+    public interface IStockRepository
     {
+        Task<List<Stock>> GetAllAsync();
     }
 }
