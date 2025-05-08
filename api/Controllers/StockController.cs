@@ -38,9 +38,9 @@ namespace api.Controllers
             return Ok(stock.ToStockDTO());
         }
         [HttpPost]
-        public IActionResult Create([FromBody] CreateStockRequestDTO stockDTO)
+        public IActionResult Create([FromBody] CreateStockRequestDTO createStockDTO)
         {
-            var stockModel = stockDTO.ToStockFromCreateDTO();
+            var stockModel = createStockDTO.ToStockFromCreateDTO();
             _ctx.Stock.Add(stockModel);
             _ctx.SaveChanges();
             return CreatedAtAction(nameof(GetByID), new { id = stockModel.Id }, stockModel.ToStockDTO());
@@ -48,9 +48,22 @@ namespace api.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] UpdateStockRequestDTO stockDTO)
+        public IActionResult Update([FromRoute] int id, [FromBody] UpdateStockRequestDTO updateStockDTO)
         {
-            var
+            var stockModel = _ctx.Stock.FirstOrDefault(stock => stock.Id == id);
+            if (stockModel == null)
+            {
+                return NotFound();
+            }
+            stockModel.Symbol = updateStockDTO.Symbol;
+            stockModel.CompanyName = updateStockDTO.CompanyName;
+            stockModel.Purchase = updateStockDTO.Purchase;
+            stockModel.LastDiv = updateStockDTO.LastDiv;
+            stockModel.Industry = updateStockDTO.Industry;
+            stockModel.MarketCap = updateStockDTO.MarketCap;
+
+            _ctx.SaveChanges();
+            return Ok(stockModel.ToStockDTO());
         }
     }
 }
