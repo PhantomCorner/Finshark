@@ -35,7 +35,7 @@ namespace api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByID([FromRoute] int id)
         {
-            var stock = await _ctx.Stock.FindAsync(id);
+            var stock = await _stockRepo.GetByIdAsync(id);
             if (stock == null)
             {
                 return NotFound();
@@ -46,8 +46,7 @@ namespace api.Controllers
         public async Task<IActionResult> Create([FromBody] CreateStockRequestDTO createStockDTO)
         {
             var stockModel = createStockDTO.ToStockFromCreateDTO();
-            await _ctx.Stock.AddAsync(stockModel);
-            await _ctx.SaveChangesAsync();
+            await _stockRepo.CreateStock(stockModel);
             return CreatedAtAction(nameof(GetByID), new { id = stockModel.Id }, stockModel.ToStockDTO());
         }
 
@@ -55,19 +54,13 @@ namespace api.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDTO updateStockDTO)
         {
-            var stockModel = await _ctx.Stock.FirstOrDefaultAsync(stock => stock.Id == id);
+            var stockModel = await _stockRepo.UpdateStockAsync(id, updateStockDTO);
             if (stockModel == null)
             {
                 return NotFound();
             }
-            stockModel.Symbol = updateStockDTO.Symbol;
-            stockModel.CompanyName = updateStockDTO.CompanyName;
-            stockModel.Purchase = updateStockDTO.Purchase;
-            stockModel.LastDiv = updateStockDTO.LastDiv;
-            stockModel.Industry = updateStockDTO.Industry;
-            stockModel.MarketCap = updateStockDTO.MarketCap;
 
-            await _ctx.SaveChangesAsync();
+
             return Ok(stockModel.ToStockDTO());
         }
 
@@ -75,13 +68,11 @@ namespace api.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var stock = await _ctx.Stock.FirstOrDefaultAsync(stock => stock.Id == id);
+            var stock = await _stockRepo.DeleteStockAsync(id);
             if (stock == null)
             {
                 return NotFound();
             }
-            _ctx.Stock.Remove(stock);
-            await _ctx.SaveChangesAsync();
             return NoContent();
         }
     }
