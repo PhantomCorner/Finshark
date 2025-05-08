@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -22,7 +23,7 @@ namespace api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var stocks = _ctx.Stock.ToList();
+            var stocks = _ctx.Stock.ToList().Select(s => s.ToStockDTO());
             return Ok(stocks);
         }
         [HttpGet("{id}")]
@@ -33,7 +34,7 @@ namespace api.Controllers
             {
                 return NotFound();
             }
-            return Ok(stock);
+            return Ok(stock.ToStockDTO());
 
         }
     }
