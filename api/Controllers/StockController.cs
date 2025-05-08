@@ -8,7 +8,8 @@ using api.DTOs.Stock;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+// Controller should not have direct access to db.
+// so we applying interfaces to do that
 namespace api.Controllers
 {
     [Route("api/stock")]
