@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
+using api.DTOs.Stock;
 using api.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,21 @@ namespace api.Controllers
                 return NotFound();
             }
             return Ok(stock.ToStockDTO());
+        }
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateStockRequestDTO stockDTO)
+        {
+            var stockModel = stockDTO.ToStockFromCreateDTO();
+            _ctx.Stock.Add(stockModel);
+            _ctx.SaveChanges();
+            return CreatedAtAction(nameof(GetByID), new { id = stockModel.Id }, stockModel.ToStockDTO());
+        }
 
+        [HttpPut]
+        [Route("{id}")]
+        public IActionResult Update([FromRoute] int id, [FromBody] UpdateStockRequestDTO stockDTO)
+        {
+            var
         }
     }
 }
