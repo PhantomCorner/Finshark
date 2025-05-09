@@ -26,5 +26,12 @@ namespace api.Repository
         {
             return await _ctx.Comments.FindAsync(id);
         }
+
+        public async Task<Comment> CreateAsync(Comment commentModel)
+        {
+            await _ctx.Comments.AddAsync(commentModel);
+            await _ctx.SaveChangesAsync();
+            return commentModel;
+        }
     }
 }
