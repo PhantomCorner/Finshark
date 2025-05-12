@@ -16,6 +16,9 @@ namespace api.Interfaces
         // get stock by id
         Task<Stock?> GetByIdAsync(int id); // First or default 可能是空值, 所以用 "?"
 
+        // get stock by symbol
+        Task<Stock?> GetBySymbolAsync(string symbol);
+
         // create a stock
         Task<Stock> CreateStock(Stock stockModel);
 
@@ -30,7 +33,6 @@ namespace api.Interfaces
 
         Task<bool> StockExist(int id);
 
-        Task<Stock?> GetBySymbolAsync(string symbol);
 
         Task<Stock?> CreateAsync(Stock stockModel);
     }
