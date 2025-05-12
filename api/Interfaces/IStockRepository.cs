@@ -30,5 +30,8 @@ namespace api.Interfaces
 
         Task<bool> StockExist(int id);
 
+        Task<Stock?> GetBySymbolAsync(string symbol);
+
+        Task<Stock?> CreateAsync(Stock stockModel);
     }
 }

@@ -20,6 +20,11 @@ namespace api.Repository
             _ctx = ctx;
         }
 
+        public Task<Stock?> CreateAsync(Stock stockModel)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Stock> CreateStock(Stock stockModel)
         {
             await _ctx.Stock.AddAsync(stockModel);
@@ -79,6 +84,11 @@ namespace api.Repository
         {
             return await _ctx.Stock.Include(c => c.Comments).FirstOrDefaultAsync(i => i.Id == id);
 
+        }
+
+        public async Task<Stock?> GetBySymbolAsync(string symbol)
+        {
+            return await _ctx.Stock.FirstOrDefaultAsync(s => s.Symbol == symbol);
         }
 
         public Task<bool> StockExist(int id)
