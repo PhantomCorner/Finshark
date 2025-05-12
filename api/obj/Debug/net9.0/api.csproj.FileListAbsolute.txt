@@ -177,3 +177,5 @@
 /Users/phantom_corner/Desktop/code/Finshark/api/bin/Debug/net9.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /Users/phantom_corner/Desktop/code/Finshark/api/bin/Debug/net9.0/Newtonsoft.Json.dll
 /Users/phantom_corner/Desktop/code/Finshark/api/bin/Debug/net9.0/Newtonsoft.Json.Bson.dll
+/Users/phantom_corner/Desktop/code/Finshark/api/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/phantom_corner/Desktop/code/Finshark/api/bin/Debug/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
