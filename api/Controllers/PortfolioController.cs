@@ -75,7 +75,7 @@ namespace api.Controllers
             }
             else
             {
-                return Created();
+                return StatusCode(201, $"Stock '{stock.Symbol}' has been added.");
             }
         }
 
@@ -99,7 +99,7 @@ namespace api.Controllers
                 return BadRequest("Stock not in your portfolio");
             }
 
-            return Ok();
+            return Ok($"Stock '{symbol}' has been removed.");
         }
 
     }
