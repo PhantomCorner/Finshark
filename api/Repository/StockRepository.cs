@@ -68,7 +68,9 @@ namespace api.Repository
                     stocks = query.IsDecsending ? stocks.OrderByDescending(s => s.MarketCap) : stocks.OrderBy(s => s.MarketCap);
                 }
             }
-            return await stocks.ToListAsync();
+
+            var skipNum = ((query.PageNum - 1) * query.PageSize);
+            return await stocks.Skip(skipNum).Take(query.PageSize).ToListAsync();
         }
 
 

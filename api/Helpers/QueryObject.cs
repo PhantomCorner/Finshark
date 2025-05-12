@@ -12,5 +12,8 @@ namespace api.Helpers
 
         public string? SortBy { get; set; } = null;
         public bool IsDecsending { get; set; } = false;
+        public int PageNum { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+
     }
 }
