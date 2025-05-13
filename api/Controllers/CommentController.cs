@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.DTOs.Comment;
 using api.Extensions;
+using api.Helpers;
 using api.Interfaces;
 using api.Mappers;
 using api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,13 +30,14 @@ namespace api.Controllers
             _fMPService = fMPService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromQuery] CommentQueryObject commentQueryObject)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var comment = await _commentRepo.GetAllAsync();
+            var comment = await _commentRepo.GetAllAsync(commentQueryObject);
             var CommentDTO = comment.Select(s => s.ToCommentDTO());
             return Ok(CommentDTO);
         }
