@@ -20,9 +20,11 @@ namespace api.Repository
             _ctx = ctx;
         }
 
-        public Task<Stock?> CreateAsync(Stock stockModel)
+        public async Task<Stock?> CreateAsync(Stock stockModel)
         {
-            throw new NotImplementedException();
+            await _ctx.Stock.AddAsync(stockModel);
+            await _ctx.SaveChangesAsync();
+            return stockModel;
         }
 
         public async Task<Stock> CreateStock(Stock stockModel)

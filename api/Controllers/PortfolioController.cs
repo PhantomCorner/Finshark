@@ -18,15 +18,16 @@ namespace api.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IStockRepository _stockRepo;
         private readonly IPortfolioRepository _portfolioRepo;
-        // private readonly IFMPService _fmpService;
+        private readonly IFMPService _fMPService;
+
         public PortfolioController(UserManager<AppUser> userManager,
-        IStockRepository stockRepo, IPortfolioRepository portfolioRepo)
+        IStockRepository stockRepo, IPortfolioRepository portfolioRepo, IFMPService fMPService)
         // IFMPService fmpService)
         {
             _userManager = userManager;
             _stockRepo = stockRepo;
             _portfolioRepo = portfolioRepo;
-            // _fmpService = fmpService;
+            _fMPService = fMPService;
         }
 
         [HttpGet]
@@ -47,19 +48,24 @@ namespace api.Controllers
             var appUser = await _userManager.FindByNameAsync(username);
             var stock = await _stockRepo.GetBySymbolAsync(symbol);
 
-
-
             if (stock == null)
             {
-                return BadRequest("Stock not found");
+                stock = await _fMPService.FindStockBySymbolAsync(symbol);
+                if (stock == null)
+                {
+                    return BadRequest("Stock does not exists");
+                }
+                else
+                {
+                    await _stockRepo.CreateAsync(stock);
+                }
             }
+
+            if (stock == null) return BadRequest("Stock not found");
 
             var userPortfolio = await _portfolioRepo.GetUserPortfolio(appUser);
 
-            if (userPortfolio.Any(e => e.Symbol.ToLower() == symbol.ToLower()))
-            {
-                return BadRequest("Cannot add same stock to portfolio");
-            }
+            if (userPortfolio.Any(e => e.Symbol.ToLower() == symbol.ToLower())) return BadRequest("Cannot add same stock to portfolio");
 
             var portfolioModel = new Portfolio
             {
@@ -75,7 +81,7 @@ namespace api.Controllers
             }
             else
             {
-                return StatusCode(201, $"Stock '{stock.Symbol}' has been added.");
+                return Created();
             }
         }
 
