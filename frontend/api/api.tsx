@@ -5,12 +5,11 @@ type SearchRes = {
 };
 // fix env not in meta
 // vite-env.d.ts needs to be in the root dir
-const API_KEY = import.meta.env.VITE_API_KEY;
-
+const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 export const searchCompanies = async function (params: string) {
   try {
     const res = await axios.get<SearchRes>(
-      `https://financialmodelingprep.com/stable/search-symbol?query=AAPL&apikey=${API_KEY}`
+      `https://financialmodelingprep.com/stable/search-symbol?query=AAPL&apikey=${VITE_API_KEY}`
     );
     return res;
   } catch (e) {

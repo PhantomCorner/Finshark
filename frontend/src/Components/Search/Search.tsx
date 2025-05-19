@@ -1,5 +1,5 @@
 import React, { useState, type ChangeEvent, type SyntheticEvent } from "react";
-
+import { searchCompanies } from "../../../api/api";
 type Props = {};
 
 const Search: React.FC<Props> = () => {
@@ -8,7 +8,8 @@ const Search: React.FC<Props> = () => {
     setSearch(e.target.value);
   };
   const handleClick = function (e: SyntheticEvent) {
-    console.log(search, e);
+    const res = searchCompanies(search);
+    console.log(res);
   };
   return (
     <div>

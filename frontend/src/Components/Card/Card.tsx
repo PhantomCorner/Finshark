@@ -1,6 +1,5 @@
 import type React from "react";
 import "./Card.css";
-import type { JSX } from "react";
 type Props = {
   companyName: string;
   price: number;
