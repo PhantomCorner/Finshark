@@ -17,10 +17,11 @@ function App() {
     // if res is string, return as error message
     if (typeof res === "string") {
       setServerError(res);
+      console.log(serverError);
     } else if (Array.isArray(res)) {
       setSearchRes(res);
+      console.log(searchRes);
     }
-    console.log(searchRes);
   };
   return (
     <div className="app">
@@ -29,6 +30,7 @@ function App() {
         search={search}
         handleChange={handleChange}
       />
+      {serverError && <h1>{serverError}</h1>}
       <CardList />
     </div>
   );

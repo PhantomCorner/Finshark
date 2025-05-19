@@ -11,12 +11,12 @@ export const searchCompanies = async function (companyName: string) {
     const res = await axios.get<SearchRes>(
       `https://financialmodelingprep.com/api/v3/search?query=${companyName}&apikey=${VITE_API_KEY}`
     );
-    return res;
+    return res.data;
   } catch (e) {
     if (axios.isAxiosError(e)) {
-      console.log(e);
+      return e.message;
     } else {
-      console.log("unexpected error");
+      return "unexpected error";
     }
   }
 };
