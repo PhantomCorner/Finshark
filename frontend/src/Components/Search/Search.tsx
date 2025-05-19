@@ -1,20 +1,19 @@
-import React, { useState, type ChangeEvent, type SyntheticEvent } from "react";
-import { searchCompanies } from "../../../api/api";
-type Props = {};
+import React, {
+  type ChangeEvent,
+  type FormEvent,
+  type SyntheticEvent,
+} from "react";
+type Props = {
+  onClick: (e: SyntheticEvent) => void;
+  search: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-const Search: React.FC<Props> = () => {
-  const [search, setSearch] = useState<string>("");
-  const handleChange = function (e: ChangeEvent<HTMLInputElement>) {
-    setSearch(e.target.value);
-  };
-  const handleClick = function (e: SyntheticEvent) {
-    const res = searchCompanies(search);
-    console.log(res);
-  };
+const Search: React.FC<Props> = ({ handleChange, onClick, search }) => {
   return (
     <div>
-      <input value={search} onChange={handleChange}></input>
-      <button onClick={handleClick}>Print</button>
+      <input value={search} onChange={(e) => handleChange(e)}></input>
+      <button onClick={(e) => onClick(e)}>Print</button>
     </div>
   );
 };

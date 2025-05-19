@@ -1,14 +1,24 @@
-import { useState } from "react";
-import Card from "./Components/Card/Card";
+import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import CardList from "./Components/CardList/cardList";
 import Search from "./Components/Search/Search";
+import { searchCompanies } from "../api/api";
 
 function App() {
-  const [count, setCount] = useState(0);
-
+  const [search, setSearch] = useState<string>("");
+  const handleChange = function (e: ChangeEvent<HTMLInputElement>) {
+    setSearch(e.target.value);
+  };
+  const handleClick = async function (e: SyntheticEvent) {
+    const res = await searchCompanies(search);
+    console.log(res);
+  };
   return (
     <div className="app">
-      <Search />
+      <Search
+        onClick={handleClick}
+        search={search}
+        handleChange={handleChange}
+      />
       <CardList />
     </div>
   );
