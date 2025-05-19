@@ -9,7 +9,7 @@ const VITE_API_KEY = import.meta.env.VITE_API_KEY;
 export const searchCompanies = async function (companyName: string) {
   try {
     const res = await axios.get<SearchRes>(
-      `https://financialmodelingprep.com/stable/search-symbol?query=${companyName}&apikey=${VITE_API_KEY}`
+      `https://financialmodelingprep.com/api/v3/search?query=${companyName}&apikey=${VITE_API_KEY}`
     );
     return res;
   } catch (e) {
