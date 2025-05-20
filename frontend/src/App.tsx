@@ -3,11 +3,13 @@ import CardList from "./Components/CardList/cardList";
 import Search from "./Components/Search/Search";
 import { searchCompanies } from "../api/api";
 import type { CompanySearch } from "../api/company";
+import ListPortfolio from "./Components/Portfolio/ListPortfolio/ListPortfolio";
 
 function App() {
   const [search, setSearch] = useState<string>("");
   const [searchRes, setSearchRes] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string>("");
+  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
   const handleSearchChange = function (e: ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
   };
@@ -24,9 +26,14 @@ function App() {
       console.log(searchRes);
     }
   };
-  const onPortfolioCreate = function (e: SyntheticEvent) {
+  const onPortfolioCreate = function (e: any) {
     e.preventDefault();
-    console.log(e);
+    const exist = portfolioValues.find((value) => {
+      return value === e.target[0].value;
+    });
+    if (exist) return;
+    const updatedPortfolio = [...portfolioValues, e.target[0].value];
+    setPortfolioValues(updatedPortfolio);
   };
   return (
     <div className="app">
@@ -36,6 +43,7 @@ function App() {
         handleSearchChange={handleSearchChange}
       />
       {serverError && <h1>{serverError}</h1>}
+      <ListPortfolio portfolioValues={portfolioValues} />
       <CardList searchRes={searchRes} onPortfolioCreate={onPortfolioCreate} />
     </div>
   );
