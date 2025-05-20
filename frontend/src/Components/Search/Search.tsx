@@ -4,17 +4,24 @@ import React, {
   type SyntheticEvent,
 } from "react";
 type Props = {
-  onClick: (e: SyntheticEvent) => void;
+  onSearchSubmit: (e: SyntheticEvent) => void;
   search: string;
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Search: React.FC<Props> = ({ handleChange, onClick, search }) => {
+const Search: React.FC<Props> = ({
+  handleSearchChange,
+  onSearchSubmit,
+  search,
+}) => {
   return (
-    <div>
-      <input value={search} onChange={(e) => handleChange(e)}></input>
-      <button onClick={(e) => onClick(e)}>Print</button>
-    </div>
+    <>
+      <form onSubmit={onSearchSubmit}>
+        <input value={search} onChange={(e) => handleSearchChange(e)}></input>
+
+        <button type="submit">Search</button>
+      </form>
+    </>
   );
 };
 export default Search;
