@@ -1,10 +1,12 @@
 import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import CardList from "./Components/CardList/cardList";
 import Search from "./Components/Search/Search";
+import Navbar from "./Components/Navbar/Navbar";
+import Hero from "./Components/Hero/Hero";
 import { searchCompanies } from "../api/api";
 import type { CompanySearch } from "../api/company";
 import ListPortfolio from "./Components/Portfolio/ListPortfolio/ListPortfolio";
-
+import "./index.css";
 function App() {
   const [search, setSearch] = useState<string>("");
   const [searchRes, setSearchRes] = useState<CompanySearch[]>([]);
@@ -44,7 +46,9 @@ function App() {
     setPortfolioValues(removed);
   };
   return (
-    <div className="app">
+    <>
+      <Navbar />
+      <Hero />
       <Search
         onSearchSubmit={onSearchSubmit}
         search={search}
@@ -56,7 +60,7 @@ function App() {
         onPortfolioDelete={onPortfolioDelete}
       />
       <CardList searchRes={searchRes} onPortfolioCreate={onPortfolioCreate} />
-    </div>
+    </>
   );
 }
 
