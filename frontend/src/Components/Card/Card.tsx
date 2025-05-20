@@ -1,9 +1,9 @@
 import type React from "react";
 import "./Card.css";
+import type { CompanySearch } from "../../../api/company";
 type Props = {
-  companyName: string;
-  price: number;
-  info: string;
+  id: string;
+  searchRes: CompanySearch;
 };
 
 // Card: React.FC<Props>
@@ -14,14 +14,16 @@ type Props = {
 //这个函数不仅接收一个 Props 类型的参数，而且它的返回值 必须是 一个 合法的 JSX 元素（JSX.Element）
 // 所以不用再声明JSX.Element
 
-const Card: React.FC<Props> = ({ companyName, price, info }) => {
+const Card: React.FC<Props> = ({ id, searchRes }) => {
   return (
     <div className="card">
       <div className="details">
-        <h2>{companyName}</h2>
-        <p>${price}</p>
+        <h2>{searchRes.name}</h2>
+        <p>${searchRes.currency}</p>
       </div>
-      <p className="info">{info}</p>
+      <p className="info">
+        {searchRes.exchangeShortName} - {searchRes.stockExchange}
+      </p>
     </div>
   );
 };

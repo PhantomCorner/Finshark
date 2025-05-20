@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CompanySearch } from "./company";
+import type { CompanySearch } from "./company";
 type SearchRes = {
   data: CompanySearch[];
 };

@@ -31,7 +31,7 @@ function App() {
         handleChange={handleChange}
       />
       {serverError && <h1>{serverError}</h1>}
-      <CardList />
+      <CardList searchRes={searchRes} />
     </div>
   );
 }
