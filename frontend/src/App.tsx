@@ -48,7 +48,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero />
+      {/* <Hero /> */}
       <Search
         onSearchSubmit={onSearchSubmit}
         search={search}
