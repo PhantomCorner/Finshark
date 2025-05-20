@@ -17,7 +17,7 @@ function App() {
     e.preventDefault();
     const res = await searchCompanies(search);
     // check res content
-    // if res is string, return as error message
+    // if res is string type, return as error message
     if (typeof res === "string") {
       setServerError(res);
       console.log(serverError);
@@ -35,6 +35,14 @@ function App() {
     const updatedPortfolio = [...portfolioValues, e.target[0].value];
     setPortfolioValues(updatedPortfolio);
   };
+
+  const onPortfolioDelete = function (e: any) {
+    e.preventDefault();
+    const removed = portfolioValues.filter((value) => {
+      return value !== e.target[0].value;
+    });
+    setPortfolioValues(removed);
+  };
   return (
     <div className="app">
       <Search
@@ -43,7 +51,10 @@ function App() {
         handleSearchChange={handleSearchChange}
       />
       {serverError && <h1>{serverError}</h1>}
-      <ListPortfolio portfolioValues={portfolioValues} />
+      <ListPortfolio
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      />
       <CardList searchRes={searchRes} onPortfolioCreate={onPortfolioCreate} />
     </div>
   );
