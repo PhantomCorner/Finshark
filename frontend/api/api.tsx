@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CompanyProfile, type CompanySearch } from "./company";
+import { type CompanyProfile, type CompanySearch } from "./company";
 type SearchRes = {
   data: CompanySearch[];
 };
