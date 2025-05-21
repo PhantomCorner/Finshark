@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import type { CompanyProfile } from "../../../api/company";
+import { getCompanyProfile } from "../../../api/api";
 
 type Props = {};
 
 const CompanyPage = (props: Props) => {
-  return <div>CompanyPage</div>;
+  let { ticker } = useParams();
+  const [company, setCompany] = useState<CompanyProfile>();
+  useEffect(() => {
+    const getProfileInit = async function () {
+      const res = await getCompanyProfile(ticker!);
+      setCompany(res?.data[0]);
+    };
+    getProfileInit();
+  }, []);
+
+  return (
+    <>
+      {company ? (
+        <div>{company.companyName}</div>
+      ) : (
+        <div>Company not found</div>
+      )}
+    </>
+  );
 };
 
 export default CompanyPage;
