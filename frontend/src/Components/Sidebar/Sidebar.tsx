@@ -25,6 +25,12 @@ const Sidebar = (props: Props) => {
             >
               <h5 className="ml-3">Income Statement</h5>
             </Link>
+            <Link
+              to="balance-sheet"
+              className="flex md:min-w-full text-blueGray-500 text-medium uppercase font-bold block pt-1 pb-4 no-underline"
+            >
+              <h5 className="ml-3">Balance Sheet</h5>
+            </Link>
           </div>
         </div>
       </div>

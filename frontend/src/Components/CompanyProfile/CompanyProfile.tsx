@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { CompanyKeyMetrics } from "../../../api/company";
 import { useOutletContext } from "react-router";
 import { getCompanyProfile, getKeyMetrics } from "../../../api/api";
