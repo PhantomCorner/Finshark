@@ -3,6 +3,7 @@ import type { CompanyBalanceSheet } from "../../../api/company";
 import { useOutletContext } from "react-router";
 import { getBalanceSheet } from "../../../api/api";
 import Table from "../Table/Table";
+import Spinner from "../Spinner/Spinner";
 
 type Props = {};
 const config = [
@@ -74,7 +75,7 @@ const BalanceSheet = (props: Props) => {
       {balanceSheet ? (
         <Table configs={config} data={balanceSheet} />
       ) : (
-        <h1> Company not found </h1>
+        <Spinner />
       )}
     </>
   );
