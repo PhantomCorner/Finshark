@@ -3,6 +3,7 @@ import "./index.css";
 import Card from "../Card/Card";
 import type { CompanySearch } from "../../../api/company";
 import { v4 as uuidv4 } from "uuid";
+import Spinner from "../Spinner/Spinner";
 type Props = {
   searchRes: CompanySearch[];
   onPortfolioCreate: (e: SyntheticEvent) => void;
@@ -26,9 +27,11 @@ const CardList: React.FC<Props> = ({
           );
         })
       ) : (
-        <p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
-          No results!
-        </p>
+        <>
+          <p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
+            No results!
+          </p>
+        </>
       )}
     </>
   );
