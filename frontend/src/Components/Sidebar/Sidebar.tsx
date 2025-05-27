@@ -35,7 +35,7 @@ const Sidebar = (props: Props) => {
               to="cash-flow"
               className="flex md:min-w-full text-blueGray-500 text-medium uppercase font-bold block pt-1 pb-4 no-underline"
             >
-              <h5 className="ml-3">Cash Flow Statement</h5>
+              <h5 className="ml-3">Cash Flow </h5>
             </Link>
           </div>
         </div>
