@@ -26,7 +26,7 @@ const Card: React.FC<Props> = ({ id, searchRes, onPortfolioCreate }) => {
       id={id}
     >
       <Link
-        to={`/company/${searchRes.symbol}`}
+        to={`/company/${searchRes.symbol}/company-profile`}
         className="font-bold text-center text-veryDarkViolet md:text-left"
       >
         {searchRes.name} ({searchRes.symbol})
