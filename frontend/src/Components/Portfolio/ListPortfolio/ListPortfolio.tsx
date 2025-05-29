@@ -1,12 +1,13 @@
-import React, { type SyntheticEvent } from "react";
+import React, {type SyntheticEvent} from "react";
 import CardPortfolio from "../CardPortfolio/CardPortfolio";
+import type {PortfolioGet} from "../../../Models/Portfolio";
 
 type Props = {
-  portfolioValues: string[];
+  portfolioValues: PortfolioGet[];
   onPortfolioDelete: (e: SyntheticEvent) => void;
 };
 
-const ListPortfolio = ({ portfolioValues, onPortfolioDelete }: Props) => {
+const ListPortfolio = ({portfolioValues, onPortfolioDelete}: Props) => {
   return (
     <section id="portfolio">
       <h2 className="mb-3 mt-3 text-3xl font-semibold text-center md:text-4xl">
