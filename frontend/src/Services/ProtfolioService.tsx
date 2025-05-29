@@ -2,7 +2,7 @@ import axios from "axios";
 import {handleError} from "../Helper/ErrorHandler";
 import type {PortfolioPost, PortfolioGet} from "../Models/Portfolio";
 
-const API_URL = "http://localhost:5254/api/portfolio/";
+const API_URL = "http://localhost:5254/api/portfolio";
 
 export const portfolioGetAPI = async function () {
   try {
