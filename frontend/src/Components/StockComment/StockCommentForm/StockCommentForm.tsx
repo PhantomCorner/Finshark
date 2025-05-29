@@ -25,7 +25,9 @@ const StockCommentForm = ({symbol, handleComment}: Props) => {
     resolver: yupResolver(validation),
   });
   return (
-    <form className="mt-4 ml-4" onSubmit={handleSubmit(handleComment)}>
+    <form
+      className="block w-full max-w-none px-6 py-4 my-4 bg-white dark:bg-gray-900 rounded-lg shadow"
+      onSubmit={handleSubmit(handleComment)}>
       <input
         type="text"
         id="title"
@@ -48,7 +50,7 @@ const StockCommentForm = ({symbol, handleComment}: Props) => {
       </div>
       <button
         type="submit"
-        className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-lightGreen rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+        className="inline-flex items-center py-2 px-4 text-xs font-medium text-center text-white bg-lightGreen rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
         Post comment
       </button>
     </form>
