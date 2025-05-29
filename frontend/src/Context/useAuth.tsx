@@ -1,8 +1,8 @@
-import React, { createContext, useEffect, useState } from "react";
-import type { UserProfile } from "../Models/User";
-import { useNavigate } from "react-router";
-import { loginAPI, registerAPI } from "../Services/AuthService";
-import { toast } from "react-toastify";
+import React, {createContext, useEffect, useState} from "react";
+import type {UserProfile} from "../Models/User";
+import {useNavigate} from "react-router";
+import {loginAPI, registerAPI} from "../Services/AuthService";
+import {toast} from "react-toastify";
 import axios from "axios";
 
 type UserContextType = {
@@ -17,7 +17,7 @@ type Props = {
   children: React.ReactNode;
 };
 const UserContext = createContext<UserContextType>({} as UserContextType);
-export const UserProvider = ({ children }: Props) => {
+export const UserProvider = ({children}: Props) => {
   const navigate = useNavigate();
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<UserProfile | null>(null);
@@ -33,11 +33,7 @@ export const UserProvider = ({ children }: Props) => {
     }
     setIsReady(true);
   }, []);
-  const registerUser = async function (
-    email: string,
-    username: string,
-    password: string
-  ) {
+  const registerUser = async function (email: string, username: string, password: string) {
     await registerAPI(email, username, password)
       .then((res) => {
         if (res) {
@@ -97,8 +93,7 @@ export const UserProvider = ({ children }: Props) => {
         logout,
         isLoggedIn,
         registerUser,
-      }}
-    >
+      }}>
       {isReady ? children : null}
     </UserContext.Provider>
   );
